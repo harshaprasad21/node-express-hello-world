@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ secrets.PORT }}
-        source: "/home/runner/work/node-express-hello-world/node-express-hello-world/*"
+        source: "*"
         target: "/home/ubuntu/myapp"
 
     # Step 5: Start or Restart the app using PM2
