@@ -45,4 +45,4 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          script: cd /home/ubuntu/myapp && pm2 restart
+          script: cd /home/ubuntu/myapp && pm2 start app.js || pm2 restart app.js
