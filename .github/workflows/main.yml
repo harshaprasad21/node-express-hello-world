@@ -38,6 +38,11 @@ jobs:
         target: "/home/ubuntu/myapp"
 
     # Step 5: Start or Restart the app using PM2
-    - name: Start the app using PM2
-      run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} "cd /home/ubuntu/myapp && pm2 restart"
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.2.2
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: cd /home/ubuntu/myapp && pm2 restart
