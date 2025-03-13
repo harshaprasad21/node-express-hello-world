@@ -24,7 +24,7 @@ jobs:
     # Step 3: Install dependencies
     - name: Install dependencies
       run: |
-        npm install express ejs 
+        npm install 
 
     # Step 4: Copy files to EC2 using SCP
     - name: Copy files to EC2 via SCP
