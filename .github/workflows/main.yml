@@ -1,5 +1,4 @@
 
-
 name: Node.js CI/CD Pipeline
 
 on:
@@ -27,21 +26,18 @@ jobs:
       run: |
         npm install
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+    # Step 4: Copy files to EC2 using SCP
     - name: Copy files to EC2 via SCP
       uses: appleboy/scp-action@v0.1.7
       with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          password: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "/home/runner/work/node-express-hello-world/node-express-hello-world/*"
-          target: "/home/ubuntu/myapp"
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        source: "/home/runner/work/node-express-hello-world/node-express-hello-world/*"
+        target: "/home/ubuntu/myapp"
 
-    
-        
-    # Step 6: Start or Restart the app using PM2
+    # Step 5: Start or Restart the app using PM2
     - name: Start the app using PM2
       run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} "cd /home/ubuntu/myapp  pm2 restart"
+        ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} "cd /home/ubuntu/myapp && pm2 restart"
